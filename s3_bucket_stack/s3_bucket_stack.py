@@ -17,14 +17,21 @@ class MyS3BucketStack(core.Stack):
             removal_policy=core.RemovalPolicy.DESTROY  # Use with caution in production
         )
 
-        # Enable public read access for objects in the bucket
-        my_bucket.add_to_resource_policy(
-            permissions=iam.PolicyStatement(
-                actions=["s3:GetObject"],
-                resources=[f"{my_bucket.bucket_arn}/*"],
-                effect=iam.Effect.ALLOW,
-                principals=[iam.ArnPrincipal("*")]  # This allows public access, restrict as needed
-            )
+        # Create the Policy Statement
+        policy_statement = iam.PolicyStatement(
+            actions=["s3:GetObject"],
+            resources=[f"{my_bucket.bucket_arn}/*"],
+            effect=iam.Effect.ALLOW,
+            principals=[iam.ArnPrincipal("*")]  # This allows public access, restrict as needed
+        )
+
+        # Attach the policy to the bucket using s3.BucketPolicy
+        s3.BucketPolicy(
+            self,
+            "MyBucketPolicy",
+            bucket=my_bucket,
+            statements=[policy_statement],
+            removal_policy=core.RemovalPolicy.DESTROY  # Use with caution in production
         )
 
         # Output the S3 bucket name
