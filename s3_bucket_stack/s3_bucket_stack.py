@@ -1,6 +1,7 @@
 from aws_cdk import (
     core,
     aws_s3 as s3
+    aws_iam as iam
 )
 
 class MyS3BucketStack(core.Stack):
@@ -18,7 +19,7 @@ class MyS3BucketStack(core.Stack):
 
         # Enable public read access for objects in the bucket
         my_bucket.add_to_resource_policy(
-            statement=s3.PolicyStatement(
+            statement=iam.PolicyStatement(
                 actions=["s3:GetObject"],
                 resources=[f"{my_bucket.bucket_arn}/*"],
                 effect=core.Effect.ALLOW,
