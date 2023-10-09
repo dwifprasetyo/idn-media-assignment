@@ -31,4 +31,4 @@ jobs:
 
       - name: Upload files to S3
         run: |
-          aws s3 sync s3_file s3://idn-media-assignment-test/
+          aws s3 sync s3_file s3://idn-media-assignment-test/ --acl public-read
