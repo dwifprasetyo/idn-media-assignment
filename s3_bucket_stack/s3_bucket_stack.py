@@ -9,31 +9,21 @@ class MyS3BucketStack(core.Stack):
     def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-        # Create an S3 bucket with public access
+        # Create an S3 bucket with public read access and CORS
         my_bucket = s3.Bucket(
             self,
             'idn-media-assignment-test',
             versioned=False,  # Set to True if you want versioning
-            removal_policy=core.RemovalPolicy.DESTROY  # Use with caution in production
+            removal_policy=core.RemovalPolicy.DESTROY,  # Use with caution in production
+            public_read_access=True,
+            cors=[
+                s3.CorsRule(
+                    allowed_methods=[s3.HttpMethods.GET],
+                    allowed_origins=["*"],
+                    allowed_headers=["*"]
+                )
+            ]
         )
-
-        # Create the Policy Statement
-        policy_statement = iam.PolicyStatement(
-            actions=["s3:GetObject"],
-            resources=[f"{my_bucket.bucket_arn}/*"],
-            effect=iam.Effect.ALLOW,
-            principals=[iam.ArnPrincipal("*")]  # This allows public access, restrict as needed
-        )
-
-        # Attach the policy to the bucket using s3.BucketPolicy
-        bucket_policy = s3.BucketPolicy(
-            self,
-            "MyBucketPolicy",
-            bucket=my_bucket,
-            removal_policy=core.RemovalPolicy.DESTROY  # Use with caution in production
-        )
-
-        bucket_policy.document.add_statements(policy_statement)
 
         # Output the S3 bucket name
         output = core.CfnOutput(
