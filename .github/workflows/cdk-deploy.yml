@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main # Adjust to your main branch name
+    paths: # Adjust these to limit the trigger to changes in specific folders or files
+      - 's3_bucket_stack/**'
+      - 'app.py'
+      - 'cdk.json'
+      - 'requirement.txt'
 
 jobs:
   deploy:
