@@ -30,7 +30,7 @@ class MyS3BucketStack(core.Stack):
             self,
             "MyBucketPolicy",
             bucket=my_bucket,
-            statements=[policy_statement],
+            policy_document=policy_document,
             removal_policy=core.RemovalPolicy.DESTROY  # Use with caution in production
         )
 
