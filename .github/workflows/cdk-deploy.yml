@@ -30,6 +30,10 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set region ap-southeast-1
       
+      - name: Debug AWS Access Key
+        run: echo ${{ secrets.AWS_ACCESS_KEY_ID }}
+
+      
       - name: Install Python Dependencies
         run: |
           pip install -r requirements.txt
