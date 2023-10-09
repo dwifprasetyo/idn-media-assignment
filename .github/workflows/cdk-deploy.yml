@@ -9,6 +9,7 @@ on:
       - 'app.py'
       - 'cdk.json'
       - 'requirement.txt'
+      - '.github/workflows/cdk-deploy.yml'
 
 jobs:
   deploy:
