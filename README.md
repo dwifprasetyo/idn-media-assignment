@@ -1,8 +1,6 @@
 # idn-media-assignment
 IDN Media Infrastructure Engineer Assignment Test
 
-IDN Media Infrastructure Engineer Assignment Test
-
 To upload, change, or remove a file in the S3 bucket, follow these steps:
 
 - Clone this repository.
