@@ -23,7 +23,7 @@ class MyS3BucketStack(core.Stack):
                 actions=["s3:GetObject"],
                 resources=[f"{my_bucket.bucket_arn}/*"],
                 effect=iam.Effect.ALLOW,
-                principals=["*"]  # This allows public access, restrict as needed
+                principals=[iam.ArnPrincipal("*")]  # This allows public access, restrict as needed
             )
         )
 
