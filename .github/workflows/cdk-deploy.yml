@@ -40,4 +40,4 @@ jobs:
       - name: Deploy CDK stack
         run: |
           # Synthesize and deploy the CDK stack (adjust the stack name)
-          cdk deploy MyS3BucketStack --require-approval never
+          cdk deploy MyS3BucketStack --require-approval never --verbose
