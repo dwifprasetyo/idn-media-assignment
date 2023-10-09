@@ -17,23 +17,23 @@ class MyS3BucketStack(core.Stack):
             removal_policy=core.RemovalPolicy.DESTROY  # Use with caution in production
         )
 
-        # # Create the Policy Statement
-        # policy_statement = iam.PolicyStatement(
-        #     actions=["s3:GetObject"],
-        #     resources=[f"{my_bucket.bucket_arn}/*"],
-        #     effect=iam.Effect.ALLOW,
-        #     principals=[iam.ArnPrincipal("*")]  # This allows public access, restrict as needed
-        # )
+        # Create the Policy Statement
+        policy_statement = iam.PolicyStatement(
+            actions=["s3:GetObject"],
+            resources=[f"{my_bucket.bucket_arn}/*"],
+            effect=iam.Effect.ALLOW,
+            principals=[iam.ArnPrincipal("*")]  # This allows public access, restrict as needed
+        )
 
-        # # Attach the policy to the bucket using s3.BucketPolicy
-        # bucket_policy = s3.BucketPolicy(
-        #     self,
-        #     "MyBucketPolicy",
-        #     bucket=my_bucket,
-        #     removal_policy=core.RemovalPolicy.DESTROY  # Use with caution in production
-        # )
+        # Attach the policy to the bucket using s3.BucketPolicy
+        bucket_policy = s3.BucketPolicy(
+            self,
+            "MyBucketPolicy",
+            bucket=my_bucket,
+            removal_policy=core.RemovalPolicy.DESTROY  # Use with caution in production
+        )
 
-        # bucket_policy.document.add_statements(policy_statement)
+        bucket_policy.document.add_statements(policy_statement)
 
         # Output the S3 bucket name
         output = core.CfnOutput(
