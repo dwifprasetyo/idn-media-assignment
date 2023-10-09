@@ -25,6 +25,11 @@ class MyS3BucketStack(core.Stack):
             principals=[iam.ArnPrincipal("*")]  # This allows public access, restrict as needed
         )
 
+        # Create Policy Document
+        policy_document = iam.PolicyDocument(
+            statements=[policy_statement]
+        )
+
         # Attach the policy to the bucket using s3.BucketPolicy
         s3.BucketPolicy(
             self,
