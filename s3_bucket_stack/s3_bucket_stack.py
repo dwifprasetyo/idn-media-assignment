@@ -19,7 +19,7 @@ class MyS3BucketStack(core.Stack):
 
         # Enable public read access for objects in the bucket
         my_bucket.add_to_resource_policy(
-            statement=iam.PolicyStatement(
+            permissions=iam.PolicyStatement(
                 actions=["s3:GetObject"],
                 resources=[f"{my_bucket.bucket_arn}/*"],
                 effect=iam.Effect.ALLOW,
