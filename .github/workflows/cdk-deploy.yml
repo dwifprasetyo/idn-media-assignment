@@ -39,8 +39,5 @@ jobs:
 
       - name: Deploy CDK stack
         run: |
-          # Navigate to your CDK app directory
-          cd s3_bucket_stack
-          
           # Synthesize and deploy the CDK stack (adjust the stack name)
           cdk deploy MyS3BucketStack --require-approval never
