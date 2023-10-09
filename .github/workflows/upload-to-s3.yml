@@ -6,6 +6,7 @@ on:
       - main # Adjust to your main branch name
     paths: # Adjust these to limit the trigger to changes in specific folders or files
       - 's3_file/**'
+      - '.github/workflows/upload-to-s3.yml'
 
 jobs:
   upload:
