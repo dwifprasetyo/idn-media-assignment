@@ -15,7 +15,7 @@ class MyS3BucketStack(core.Stack):
             'idn-media-assignment-test',
             versioned=False,  # Set to True if you want versioning
             removal_policy=core.RemovalPolicy.DESTROY,  # Use with caution in production
-            block_public_access=s3.BlockPublicAccess(block_public_policy=False)
+            block_public_access=s3.BlockPublicAccess(block_public_policy=True),
             cors=[
                 s3.CorsRule(
                     allowed_methods=[s3.HttpMethods.GET],
