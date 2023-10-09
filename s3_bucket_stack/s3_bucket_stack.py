@@ -26,6 +26,14 @@ class MyS3BucketStack(core.Stack):
             ]
         )
 
+        # Grant public read access to all objects in the bucket
+        my_bucket.add_to_resource_policy(iam.PolicyStatement(
+            actions=["s3:GetObject"],
+            resources=[f"{my_bucket.bucket_arn}/*"],
+            effect=iam.Effect.ALLOW,
+            principals=[iam.ArnPrincipal('*')]
+        ))
+
         # Output the S3 bucket name
         output = core.CfnOutput(
             self,
