@@ -33,6 +33,7 @@ jobs:
       - name: Install Python Dependencies
         run: |
           pip install -r requirements.txt
+          pip install --upgrade aws-cdk.core aws-cdk.aws-s3 aws-cdk.aws-iam
 
       - name: Synthesize CDK app
         run: cdk synth
