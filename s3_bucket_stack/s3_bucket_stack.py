@@ -13,6 +13,7 @@ class MyS3BucketStack(core.Stack):
         my_bucket = s3.Bucket(
             self,
             'idn-media-assignment-test',
+            bucket_name='idn-media-assignment-test',
             versioned=False,  # Set to True if you want versioning
             removal_policy=core.RemovalPolicy.DESTROY,  # Use with caution in production
             block_public_access=s3.BlockPublicAccess(block_public_policy=True),
