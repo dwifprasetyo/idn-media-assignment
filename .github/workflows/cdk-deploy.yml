@@ -1,0 +1,42 @@
+name: Deploy CDK Stack
+
+on:
+  push:
+    branches:
+      - main # Adjust to your main branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install AWS CLI and CDK
+        run: |
+          npm install -g aws-cdk
+          aws --version
+          cdk --version
+
+      - name: Configure AWS Credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set region ap-southeast-1
+
+      - name: Synthesize CDK app
+        run: cdk synth
+
+      - name: Deploy CDK stack
+        run: |
+          # Navigate to your CDK app directory
+          cd /path/to/your/cdk/app
+          
+          # Synthesize and deploy the CDK stack (adjust the stack name)
+          cdk deploy <your-stack-name> --require-approval never
