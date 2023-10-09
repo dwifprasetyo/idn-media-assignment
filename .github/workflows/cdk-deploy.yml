@@ -18,15 +18,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          node-version: 18
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
-        with:
-          node-version: 18
 
-      - name: Install AWS CLI and CDK
+      - name: Install CDK
         run: |
           npm install -g aws-cdk
           aws --version
@@ -47,5 +43,4 @@ jobs:
 
       - name: Deploy CDK stack
         run: |
-          # Synthesize and deploy the CDK stack (adjust the stack name)
           cdk deploy MyS3BucketStack --require-approval never --verbose
